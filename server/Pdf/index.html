@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 1%;
+        font: Helvetica;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #e5e5e5;
+      }
+
+      .id {
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        display: flex;
+        -webkit-box-pack: justify;
+        width: 80%;
+        margin-top: 5px;
+        margin-bottom: 2px;
+      }
+      .id1 {
+        width: 83%;
+        height: 2px;
+        background-color: #918d8d;
+      }
+      /* .header {
+      } */
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        display: flex;
+        -webkit-box-pack: justify;
+        margin-top: 8px;
+      "
+    >
+      <img
+        src="https://emiassets.s3.amazonaws.com/Asset%204.png"
+        alt="Description for image"
+        width="150"
+        height="65"
+      />
+
+      <div style="text-align: right">
+        <div style="font-weight: bolder">Date: {{date}}</div>
+        <div style="font-weight: bolder">Due date: {{duDate}}</div>
+      </div>
+    </div>
+
+    <div style="width: 260px; margin-top: 12px">
+      EMI Fusion <br />45-A Farooq Ave, Block G Phase 1 Johar Town, Lahore,
+      Punjab 54782
+    </div>
+    <div style="width: 260px; margin-top: 12px">
+      <div><b>Invoice to:</b></div>
+      <div>{{clientName}}</div>
+      <div>{{clientCompany}}</div>
+      <div>{{clientAddress}}</div>
+      <div>{{clientContact}}</div>
+      <div>{{clientEmail}}</div>
+    </div>
+
+    <table>
+      <tr>
+        <th>#</th>
+        <th>ITEM</th>
+        <th>PDESCRIPTION</th>
+        <th>UNIT COST</th>
+        <th>QTY</th>
+        <th>TOTAL</th>
+      </tr>
+
+      {{#each invoiceItems}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.itemName}}</td>
+        <td>{{this.description}}</td>
+        <td>${{this.unitCost}}</td>
+        <td>{{this.quantity}}</td>
+        <td>${{this.amount}}</td>
+      </tr>
+      {{/each}}
+    </table>
+
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        margin-top: 12px;
+        align-items: flex-end;
+        margin-left: 60%;
+        width: 50%;
+      "
+    >
+      <div class="id">
+        <div><b>Subtotal:</b></div>
+        <div>${{subtotal}}</div>
+      </div>
+      <div class="id1"></div>
+      <div class="id">
+        <div><b>Tax: ({{taxPercentage}}%)</b></div>
+        <div>${{tax}}</div>
+      </div>
+      <div class="id1"></div>
+      <div class="id">
+        <div><b>Discount: ({{discontPercentage}}%)</b></div>
+        <div>${{discount}}</div>
+      </div>
+      <div class="id1"></div>
+      <div class="id">
+        <div><b>Total:</b></div>
+        <div>${{total}}</div>
+      </div>
+      <div class="id1"></div>
+    </div>
+
+    <div style="margin-top: 15px; font-weight: bolder">Other Information</div>
+    <p style="width: 100%; margin: 5px; color: #978e8e">{{otherInformation}}</p>
+  </body>
+</html>

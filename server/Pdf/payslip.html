@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 1%;
+        font-family: Circular Std;
+      }
+      .id {
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        display: flex;
+        -webkit-box-pack: justify;
+        border: 1px solid gray;
+        padding: 1%;
+      }
+
+      .id1 {
+        width: 48%;
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        display: flex;
+        -webkit-box-pack: justify;
+        border: 1px solid gray;
+        padding: 1%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        width: 100%;
+        text-align: center;
+        text-decoration: underline;
+        font-size: 18px;
+      "
+    >
+      <b> PAYSLIP FOR THE MONTH OF {{month}} {{year}} </b>
+    </div>
+    <div
+      style="
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        display: flex;
+        -webkit-box-pack: justify;
+        margin-top: 18px;
+      "
+    >
+      <img
+        src="https://emiassets.s3.amazonaws.com/Asset%204.png"
+        alt="Description for image"
+        width="200"
+        height="75"
+      />
+    </div>
+
+    <div style="width: 240px; margin-top: 10px">
+      EMI Fusion <br />45-A Farooq Ave, Block G Phase 1 Johar Town, Lahore,
+      Punjab 54782
+    </div>
+    <div style="width: 260px; margin-top: 12px">
+      <div><b>Invoice to:</b></div>
+      <div>{{userName}}</div>
+      <div>{{userdesignation}}</div>
+      <div>Joining Date:{{JoiningDate}}</div>
+    </div>
+
+    <div
+      style="
+        margin-top: 12px;
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        display: flex;
+        -webkit-box-pack: justify;
+      "
+    >
+      <div style="width: 48%">
+        <div><strong style="font-size: 21px">Earn</strong></div>
+        {{#each earningIncentives}}
+        <div class="id">
+          <div><b>{{this.incentive}}</b></div>
+          <div><b>Rs {{this.calculatedAmount}}</b></div>
+        </div>
+        {{/each}}
+      </div>
+      <div style="width: 48%">
+        <strong style="font-size: 21px">Deduction</strong>
+        {{#each deductionIncentives}}
+        <div class="id">
+          <div><b>{{this.incentive}}</b></div>
+          <div><b>Rs {{this.calculatedAmount}}</b></div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <div
+      style="
+        display: -webkit-box; /* wkhtmltopdf uses this one */
+        display: flex;
+        -webkit-box-pack: justify;
+      "
+    >
+      <div style="width: 48%">
+        <div class="id">
+          <div><b>Total Earning</b></div>
+          <div><b>Rs {{totalEarn}}</b></div>
+        </div>
+      </div>
+      <div style="width: 48%">
+        <div class="id">
+          <div><b>Total Deduction</b></div>
+          <div><b>Rs {{totalDeduction}}</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px">
+      <strong> Net Salary: Rs {{total}} </strong>({{words}}.)
+    </div>
+  </body>
+</html>

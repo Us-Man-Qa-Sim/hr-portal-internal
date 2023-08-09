@@ -1,0 +1,45 @@
+const Sequelize = require("sequelize");
+const { v4: UUIDV4 } = require("uuid");
+const db = require("../configs/Database");
+
+const Answer = db.define(
+  "answer",
+  {
+    id: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
+    },
+    answer: {
+      type: Sequelize.TEXT,
+    },
+    testId: {
+      type: Sequelize.UUID,
+      allowNull: false,
+    },
+    questionId: {
+      type: Sequelize.UUID,
+      allowNull: false,
+    },
+    testUserId: {
+      type: Sequelize.UUID,
+      allowNull: false,
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    },
+  },
+  {
+    hooks: {
+      beforeCreate: (answer) => (answer.id = UUIDV4()),
+    },
+  }
+);
+
+module.exports = Answer;
